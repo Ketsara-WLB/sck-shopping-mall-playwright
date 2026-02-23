@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('เข้าสู่ระบบ', async ({ page }) => {
+test('เข้าสู่ระบบ ค้นหาสินค้า และสั่งซื้อสินค้า Balance Training Bicycle 3 ชิ้น สำเร็จ', async ({ page }) => {
   await test.step("เข้าสู่ระบบ",async ()=> {
     await page.goto('http://139.59.225.96/auth/login');
 
@@ -42,12 +42,19 @@ test('เข้าสู่ระบบ', async ({ page }) => {
     await page.locator('#shipping-form-first-name-input').fill('เกษรา');
     await page.locator('#shipping-form-last-name-input').fill('ปิยะชนกวงศ์');
     await page.locator('#shipping-form-address-input').fill('1112 ม.3 ซ.ด่านสำโรง33/3 ถ.สุขุมวิท113');
-    await page.locator('#shipping-form-province-select').selectOption('2');
-    await page.locator('#shipping-form-district-select').selectOption('1101');
-    await page.locator('#shipping-form-sub-district-select').selectOption('110102');
+    await page.locator('#shipping-form-province-select').selectOption('สมุทรปราการ');
+    await page.locator('#shipping-form-district-select').selectOption('เมืองสมุทรปราการ');
+    await page.locator('#shipping-form-sub-district-select').selectOption('สำโรงเหนือ');
     await page.locator('#shipping-form-mobile-input').fill('0802101111');
 
     await expect(page.locator('#shipping-form-zipcode-input')).toHaveValue('10270');
+  });
+
+  await test.step('เลือกขนส่ง Kerry ค่าส่ง 50.00 บาท',async ()=> {
+    await page.locator('#shipping-method-2-card').click();
+
+    await expect(page.locator('#shipping-method-2-fee')).toHaveText('฿50.00');
+    await expect(page.locator('#order-summary-shipping-fee-price')).toHaveText('฿50.00');
 });
 
 
