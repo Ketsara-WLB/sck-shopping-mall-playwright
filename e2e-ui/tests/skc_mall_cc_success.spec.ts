@@ -55,7 +55,15 @@ test('เข้าสู่ระบบ ค้นหาสินค้า แล
 
     await expect(page.locator('#shipping-method-2-fee')).toHaveText('฿50.00');
     await expect(page.locator('#order-summary-shipping-fee-price')).toHaveText('฿50.00');
-});
+  });
+  
+  await test.step('เลือกวิธีชำระเงินด้วยบัตรเครดิต',async ()=> {
+    await page.locator('#payment-credit-input').click();
+    await page.locator('#payment-credit-form-fullname-input').fill('เกษรา ปิยะชนกวงศ์');
+    await page.locator('#payment-credit-form-card-number-input').fill('8372 4737 6437 4212');
+    await page.locator('#payment-credit-form-expiry-input').fill('0728');
+    await page.locator('#payment-credit-form-cvv-input').fill('737');
+  });
 
 
 });
