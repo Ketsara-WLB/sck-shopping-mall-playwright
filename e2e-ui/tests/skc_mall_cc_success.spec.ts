@@ -30,7 +30,12 @@ test('เข้าสู่ระบบ', async ({ page }) => {
   await test.step("ตรวจจำนวน badge ในตระกร้าเท่ากับ 1 และคลิกตะกร้า พบชื่อสินค้า Balance Training Bicycle จำนวน 3 ชิ้น ราคา ฿12,943.80 จำนวนแต้ม 129 แต้ม สต็อค 90 ชิ้น และยอดรวมราคา ฿12,943.80", async ({ }) => {
     await expect(page.locator('#header-menu-cart-badge')).toHaveText('1');
     await page.locator('#header-menu-cart-btn').click();
-    
+    await expect(page.locator('#product-1-name')).toHaveText("Balance Training Bicycle");
+    await expect(page.locator('#product-1-price')).toHaveText("฿12,943.80");
+    await expect(page.locator('#product-1-point')).toHaveText("129 Points");
+    await expect(page.locator('#product-1-quantity-input')).toHaveValue('3');
+    await expect(page.locator('#shopping-cart-subtotal-price')).toHaveText('฿12,943.80');
+
   });
 
 
