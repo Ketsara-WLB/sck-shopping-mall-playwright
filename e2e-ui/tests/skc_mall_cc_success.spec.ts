@@ -80,8 +80,16 @@ test('เข้าสู่ระบบ ค้นหาสินค้า แล
   });
 
   await test.step('กรอกรหัส otp',async ()=> {
+    await page.getByRole('button', { name: 'Request OTP' }).click();
     await page.locator('#otp-input').fill('000000');
-    // await page.locator('#payment-now-btn').click();
+    await page.getByRole('button', { name: 'OK' }).click();
+  });
+
+  await test.step('กรอกอีเมล และเบอร์โทรเพื่อรับข่าวสารแจ้งเตือน',async ()=> {
+    await page.locator('#notification-form-email-input').fill('ketsara.piy@welovebug.com');
+    await page.locator('#notification-form-mobile-input').fill('0801234567');
+    await page.locator('#notification-form-in-application-input').click();
+    await page.locator('#send-notification-btn').click();
   });
 
 
